@@ -1,0 +1,22 @@
+#:kivy 1.0.9
+
+<BoidseverywhereGame>:
+
+<Boid>:
+    size: 10, 10
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: self.angle
+            axis: 0,0,1
+            origin: self.center
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: self.size
+        Rectangle:
+            pos: self.x + self.width/2, self.y + self.height/2
+            size: self.width/8, self.height
+    canvas.after:
+        PopMatrix
+
