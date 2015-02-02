@@ -1,22 +1,97 @@
 #:kivy 1.0.9
 
-<BoidseverywhereGame>:
+<BoidGame>:
+    orientation: 'horizontal'
+    spacing: 50
+
+<HuntingGrounds>:
+    size_hint: .7, 1
+
+<ControlDashboard>:
+    size_hint: .3, 1
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Separation weight: %s' % int(separationSlider.value)
+
+            Slider:
+                id: separationSlider
+                min: 0
+                max: 100
+                value: 0
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Alignment weight: %s' % int(alignmentSlider.value)
+
+            Slider:
+                id: alignmentSlider
+                min: 0
+                max: 100
+                value: 0
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Cohesion weight: %s' % int(cohesionSlider.value)
+
+            Slider:
+                id: cohesionSlider
+                min: 0
+                max: 100
+                value: 0
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Button:
+                id: addObstacleButton
+                text: 'Add obstacle'
+
+            Button:
+                id: removeObstaclesButton
+                text: 'Remove obstacles'
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Button:
+                id: addPredatorButton
+                text: 'Add predator'
+
+            Button:
+                id: removePredatorsButton
+                text: 'Remove predators'
 
 <Boid>:
     size: 10, 10
+
     canvas.before:
         PushMatrix
         Rotate:
             angle: self.angle
             axis: 0,0,1
             origin: self.center
+
     canvas:
+        Color:
+            rgba: 0, 1, 0, .5
+
         Ellipse:
             pos: self.pos
             size: self.size
+
         Rectangle:
             pos: self.x + self.width/2, self.y + self.height/2
             size: self.width/8, self.height
+
     canvas.after:
         PopMatrix
 
